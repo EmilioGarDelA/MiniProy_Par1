@@ -14,10 +14,31 @@ const animales = [
     { nombre: "Leon", sonido: "", imagen: "" },
 ];
 
+// Función para reproducir un sonido
 function reproducirSonido(nombreSonido) {
     const audio = new Audio(nombreSonido);
     audio.play();
 }
 
 // Ejemplo de uso
-reproducirSonido('Perro.mp3');
+reproducirSonido('woof.mp3');
+
+
+// Lógica del juego
+
+// Función para iniciar el juego
+function iniciarJuego() {
+    const alias = document.getElementById('alias').value;
+    // Verificar si el alias existe en el localStorage
+    let jugador = JSON.parse(localStorage.getItem(alias));
+    if (!jugador) {
+        jugador = { alias: alias, puntos: 0, mejorTiempo: Infinity };
+        localStorage.setItem(alias, JSON.stringify(jugador));
+    }
+    // Ocultar pantalla de inicio y mostrar pantalla de juego
+    document.getElementById('inicio').style.display = 'none';
+    document.getElementById('juego').style.display = 'block';
+    // Iniciar lógica del juego
+}
+
+// Resto de la lógica del juego...
