@@ -1,4 +1,6 @@
 document.getElementById("botonJugar").addEventListener("click", function() {
+    const alias = document.getElementById('alias').value;
+    localStorage.setItem('alias', alias); // Guarda el alias en localStorage
     window.location.href = "juego.html";
 });
 
@@ -23,22 +25,24 @@ function reproducirSonido(nombreSonido) {
 // Ejemplo de uso
 reproducirSonido('woof.mp3');
 
-
 // Lógica del juego
 
 // Función para iniciar el juego
 function iniciarJuego() {
-    const alias = document.getElementById('alias').value;
-    // Verificar si el alias existe en el localStorage
-    let jugador = JSON.parse(localStorage.getItem(alias));
-    if (!jugador) {
-        jugador = { alias: alias, puntos: 0, mejorTiempo: Infinity };
-        localStorage.setItem(alias, JSON.stringify(jugador));
-    }
+    const alias = localStorage.getItem('alias'); // Obtener el alias del localStorage
+    document.getElementById('aliasPlaceholder').textContent = alias; // Mostrar el alias en la página secundaria
     // Ocultar pantalla de inicio y mostrar pantalla de juego
     document.getElementById('inicio').style.display = 'none';
     document.getElementById('juego').style.display = 'block';
     // Iniciar lógica del juego
 }
 
-// Resto de la lógica del juego...
+// Función para obtener el alias del jugador del localStorage y mostrarlo en el span
+function mostrarAlias() {
+    const alias = localStorage.getItem('alias');
+    document.getElementById('aliasPlaceholder').textContent = alias;
+}
+
+// Llamar a la función al cargar la página
+mostrarAlias();
+
